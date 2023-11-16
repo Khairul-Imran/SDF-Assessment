@@ -26,7 +26,7 @@ public class ClientSessionManager {
     final Console console = System.console();
     boolean stop = false;
 
-    Double itemPrice = 0d;
+    // Double itemPrice = 0d;
 
 
     while (!stop) {
@@ -36,26 +36,48 @@ public class ClientSessionManager {
       bw.write(line);
       bw.flush();
 
-      List<String> productDetails = new ArrayList<>();
+      List<Product> productDetails = new ArrayList<>();
+      int counter; // For counting processed products.
+      String RequestID;
+      Integer itemCount = 0;
+      Double budget = 0d;
+      Product product = new Product(itemCount, budget, itemCount);
 
-      while ((line = br.readLine()) != "") { // Gets the data from the Server.
+      while (true) { // Gets the data from the Server.
         String result = br.readLine();
         result = result.trim();
-        if ("prod_end".equals(result)) { // Not necessary.
-          break;
+        // if ("prod_end".equals(result)) { // Not necessary.
+        if (result.startsWith("request_id: ")) {
+          RequestID = result.substring(11);
+        } else if (result.startsWith("item_count: ")) {
+          itemCount = Integer.parseInt(result.substring(11));
+        } else if (result.startsWith("budget: ")) {
+          budget = Double.parseDouble(result.substring(7));
+        } else if ("prod_start".equals(result)) {
+          product = new Product(itemCount, budget, itemCount);
+        } else if (result.startsWith("prod_id: ")) {
+          int id = Integer.parseInt(result.substring(9));
+          product.setProductId(id);
+        } else if (result.startsWith("price: ")) {
+          double price = Double.parseDouble(result.substring(6));
+          product.setPrice(price);
+        } else if (result.startsWith("rating: ")) {
+          int rating = Integer.parseInt(result.substring(7));
+          product.setRating(rating);
+        } else if ("prod_end".equals(result)) {
+          productDetails.add(product);
+        } else {
+          continue;
         }
-
-        productDetails.add(result);
+        
         System.out.printf(">%s\n", result);
-
-        // Map<Integer, Map<Integer, Product>> output = result.stream()
-        //   .sorted()
-
+        
 
 
       }
-      System.out.println("hello");
-      System.out.println(Arrays.toString(productDetails.toArray()));
+
+      // System.out.println("hello");
+      // System.out.println(Arrays.toString(productDetails.toArray()));
 
     }
     bw.flush();

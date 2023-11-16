@@ -2,13 +2,13 @@ package com.example.NetworkingChallenge;
 
 public class Product {
   Integer productId;
+  Double price;
   Integer rating;
-  Integer price;
 
-  public Product(Integer productId, Integer rating, Integer price) {
+  public Product(Integer productId, Double price, Integer rating) {
     this.productId = productId;
-    this.rating = rating;
     this.price = price;
+    this.rating = rating;    
   }
 
   public Integer getProductId() {
@@ -19,7 +19,19 @@ public class Product {
     return rating;
   }
 
-  public Integer getPrice() {
+  public Double getPrice() {
     return price;
+  }
+
+  public void setProductId(Integer productId) {
+    this.productId = productId;
+  }
+
+  public void setPrice(Double price) {
+    this.price = price;
+  }
+
+  public void setRating(Integer rating) {
+    this.rating = rating;
   }
 }
