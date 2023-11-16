@@ -1,22 +1,16 @@
 package com.example.PlayStoreApp;
 
-public class PlaystoreData {
+public class PlaystoreAppData {
 
   private String appName;
-  private Float rating;
+  private double rating;
   private String category;
 
-  public PlaystoreData(String appName, Float rating, String category) {
+  public PlaystoreAppData(String appName, double rating, String category) {
     this.appName = appName;
     this.rating = rating;
     this.category = category;
   }
-  
-
-
-
-
-
 
 
 
@@ -26,13 +20,23 @@ public class PlaystoreData {
 
   public void setAppName(String appName) { this.appName = appName; }
 
-  public Float getRating() { return rating; }
+  public double getRating() { return rating; }
 
   public void setRating(Float rating) { this.rating = rating; }
 
   public String getCategory() { return category; }
 
   public void setCategory(String category) { this.category = category; }
+
+
+
+
+  @Override
+  public String toString() {
+    return "PlaystoreAppData [appName=" + appName + ", rating=" + rating + ", category=" + category + "]";
+  }
+
+  
 
 
 }
