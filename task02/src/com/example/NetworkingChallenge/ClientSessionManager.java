@@ -7,9 +7,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
 public class ClientSessionManager {
 
@@ -26,8 +25,6 @@ public class ClientSessionManager {
     final Console console = System.console();
     boolean stop = false;
 
-    // Double itemPrice = 0d;
-
 
     while (!stop) {
       String line = console.readLine(">Enter to receive data from the server.");
@@ -37,7 +34,7 @@ public class ClientSessionManager {
       bw.flush();
 
       List<Product> productDetails = new ArrayList<>();
-      int counter; // For counting processed products.
+      int counter = 0; // For counting processed products.
       String RequestID;
       Integer itemCount = 0;
       Double budget = 0d;
@@ -46,7 +43,8 @@ public class ClientSessionManager {
       while (true) { // Gets the data from the Server.
         String result = br.readLine();
         result = result.trim();
-        // if ("prod_end".equals(result)) { // Not necessary.
+
+        // Assigns the properties to the product object or to the necessary variables.
         if (result.startsWith("request_id: ")) {
           RequestID = result.substring(11);
         } else if (result.startsWith("item_count: ")) {
@@ -66,25 +64,20 @@ public class ClientSessionManager {
           product.setRating(rating);
         } else if ("prod_end".equals(result)) {
           productDetails.add(product);
+          counter++;
         } else {
           continue;
         }
-        
+        // Just to see the output.
         System.out.printf(">%s\n", result);
         
-
+        // Sorting our list of products. Something is wrong here.....
+        // productDetails.sort(Comparator.comparing(item -> item::getRating).thenComparing(product -> product::getPrice)).reversed();
 
       }
-
-      // System.out.println("hello");
-      // System.out.println(Arrays.toString(productDetails.toArray()));
-
     }
     bw.flush();
     br.close();
     socket.close();
   }
-  
-
-
 }
