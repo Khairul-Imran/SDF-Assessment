@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+
 public class ClientSessionManager {
 
   private final Socket socket;
@@ -43,6 +44,9 @@ public class ClientSessionManager {
         String result = br.readLine();
         result = result.trim();
 
+        // Just to see the output.
+        System.out.printf(">%s\n", result);
+
         // Assigns the properties to the product object or to the necessary variables.
         if (result.startsWith("request_id: ")) {
           RequestID = result.substring(11);
@@ -67,8 +71,6 @@ public class ClientSessionManager {
         } else {
           continue;
         }
-        // Just to see the output.
-        System.out.printf(">%s\n", result);
         
         // Sorting our list of products. Something is wrong here.....
         // productDetails.sort(Comparator.comparing(item -> item::getRating).thenComparing(product -> product::getPrice)).reversed();
