@@ -12,9 +12,6 @@ public class PlaystoreAppData {
     this.category = category;
   }
 
-
-
-
   // Getters and Setters
   public String getAppName() { return appName; }
 
@@ -28,15 +25,8 @@ public class PlaystoreAppData {
 
   public void setCategory(String category) { this.category = category; }
 
-
-
-
   @Override
   public String toString() {
     return "PlaystoreAppData [appName=" + appName + ", rating=" + rating + ", category=" + category + "]";
   }
-
-  
-
-
 }

@@ -25,7 +25,6 @@ public class ClientSessionManager {
     final Console console = System.console();
     boolean stop = false;
 
-
     while (!stop) {
       String line = console.readLine(">Enter to receive data from the server.");
       line = line.trim() + "\n";
