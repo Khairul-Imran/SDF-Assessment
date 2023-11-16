@@ -13,16 +13,13 @@ public class Main {
   public static final int COL_APP_NAME = 0;
   public static final int COL_RATING = 2;
 
-  public static final String[] LABELS = {
-    // Might not use this.
-  };
-
   public static void main(String[] args) {
 
     if (args.length <= 0) {
       System.err.println("Please include the CSV file in your command.");
       System.exit(1);
     }
+    
     System.out.printf("Processing %s\n", args[0]);
     // java -cp classes com.example.PlayStoreApp.Main googleplaystore.csv
     
